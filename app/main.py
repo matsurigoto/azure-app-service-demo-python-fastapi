@@ -17,4 +17,8 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.get("/demo")
 def read_root():
-    return {"Hello": "thsi is demo"}
+    return {"Hello": "this is demo"}
+
+@app.get("/test")
+def read_root():
+    return {"Hello": "this is test"}
