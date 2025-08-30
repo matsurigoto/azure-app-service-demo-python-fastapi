@@ -1,6 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
-from .routers import students, teachers
+from .routers import students, teachers, employees
 
 app = FastAPI()
 
@@ -22,6 +22,7 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 
 app.include_router(students.router)
 app.include_router(teachers.router)
+app.include_router(employees.router)
 
 if __name__ == "__main__":
     import uvicorn
