@@ -1,5 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
+from .routers import students, teachers
 
 app = FastAPI()
 
@@ -7,13 +8,20 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/status}")
-def read_root():
-    return {"Status": "Success"}
+@app.get("/status")
+def read_status():
+    return {"status": "ok"}
+
+@app.get("/users/me")
+def read_users_me():
+    return {"user": "me"}
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
+
+app.include_router(students.router)
+app.include_router(teachers.router)
 
 if __name__ == "__main__":
     import uvicorn
