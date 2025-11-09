@@ -1,2 +1,10 @@
-fastapi[standard]>=0.113.0,<0.114.0
-pydantic>=2.7.0,<3.0.0
+fastapi[standard]>=0.115.6
+pydantic>=2.10.6
+starlette>=0.47.2
+certifi>=2024.7.4
+cryptography>=42.0.4
+requests>=2.32.4
+setuptools>=78.1.1
+Jinja2>=3.1.5
+idna>=3.7
+urllib3>=2.5.0
