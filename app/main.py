@@ -21,4 +21,5 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Bind to 0.0.0.0 for container/cloud deployments (Azure App Service)
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # nosec B104
