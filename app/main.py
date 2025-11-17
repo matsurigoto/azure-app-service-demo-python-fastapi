@@ -65,23 +65,22 @@ async def track_tutorial_view(tutorial_id: int, user_id: str = "default_user"):
     if user_id not in recently_viewed_db:
         recently_viewed_db[user_id] = deque(maxlen=10)
     
-    # Create recently viewed entry
-    viewed_entry = {
-        "tutorial_id": tutorial.id,
-        "title": tutorial.title,
-        "description": tutorial.description,
-        "url": tutorial.url,
-        "viewed_at": datetime.now()
-    }
-    
-    # Remove if already exists to avoid duplicates
-    user_views = recently_viewed_db[user_id]
-    recently_viewed_db[user_id] = deque(
-        [v for v in user_views if v["tutorial_id"] != tutorial_id],
-        maxlen=10
+    # Create recently viewed entry using the model
+    viewed_entry = RecentlyViewedTutorial(
+        tutorial_id=tutorial.id,
+        title=tutorial.title,
+        description=tutorial.description,
+        url=tutorial.url,
+        viewed_at=datetime.now()
     )
     
-    # Add to the front (most recent)
+    # Remove if already exists to avoid duplicates (more efficient approach)
+    user_views = recently_viewed_db[user_id]
+    # Filter out the tutorial if it already exists
+    filtered_views = [v for v in user_views if v.tutorial_id != tutorial_id]
+    
+    # Create new deque with filtered views and add new entry at the front
+    recently_viewed_db[user_id] = deque(filtered_views, maxlen=10)
     recently_viewed_db[user_id].appendleft(viewed_entry)
     
     return {"message": "Tutorial view tracked successfully", "tutorial_id": tutorial_id}
