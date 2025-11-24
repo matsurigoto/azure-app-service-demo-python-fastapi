@@ -83,7 +83,6 @@ async def delete_student(student_id: int):
     if student_id not in students_db:
         raise HTTPException(status_code=404, detail="Student not found")
     del students_db[student_id]
-    return None
 
 if __name__ == "__main__":
     import uvicorn
