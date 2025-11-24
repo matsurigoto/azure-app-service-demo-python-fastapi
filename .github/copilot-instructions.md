@@ -143,12 +143,13 @@ pip install -r requirements.txt
 ## Key Facts and Gotchas
 
 1. **Endpoint Path:** The `/status}` endpoint includes a `}` character in the path - this is intentional, not a typo
-2. **No Tests:** There is no test infrastructure (no pytest, unittest, etc.)
-3. **No README:** No README.md or other documentation exists
-4. **Duplicate Dockerfiles:** Both root and `app/Dockerfile` exist - root Dockerfile is primary
-5. **Python Version:** CI uses 3.9, but code works with 3.12+ (tested)
-6. **SSL Issues:** Docker builds fail in sandboxed environments due to SSL certificate issues with PyPI
-7. **Dependencies:** Always install dependencies before any build/run/test operations
+2. **Duplicate Function Names:** `app/main.py` has two functions named `read_root` (lines 7 and 11). While FastAPI handles this correctly (both routes work), this is a code smell that should be addressed if refactoring
+3. **No Tests:** There is no test infrastructure (no pytest, unittest, etc.)
+4. **No README:** No README.md or other documentation exists
+5. **Duplicate Dockerfiles:** Both root and `app/Dockerfile` exist - root Dockerfile is primary
+6. **Python Version:** CI uses 3.9, but code works with 3.12+ (tested)
+7. **SSL Issues:** Docker builds fail in sandboxed environments due to SSL certificate issues with PyPI
+8. **Dependencies:** Always install dependencies before any build/run/test operations
 
 ## File Contents Reference
 
