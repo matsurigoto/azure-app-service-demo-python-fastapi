@@ -1,4 +1,4 @@
-from typing import Union, List, Optional
+from typing import Union, List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -10,7 +10,7 @@ class Teacher(BaseModel):
     name: str
     subject: str
     email: str
-    years_of_experience: Optional[int] = 0
+    years_of_experience: int = 0
 
 # In-memory storage for teachers
 teachers_db = {}
@@ -53,6 +53,8 @@ async def update_teacher(teacher_id: int, teacher: Teacher):
     """Update an existing teacher"""
     if teacher_id not in teachers_db:
         raise HTTPException(status_code=404, detail="Teacher not found")
+    if teacher.id != teacher_id:
+        raise HTTPException(status_code=400, detail="Teacher ID in path and body must match")
     teachers_db[teacher_id] = teacher
     return teacher
 
