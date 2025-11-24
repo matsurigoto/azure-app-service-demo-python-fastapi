@@ -24,7 +24,7 @@ class TeacherUpdate(BaseModel):
     email: Optional[str] = None
     years_of_experience: Optional[int] = None
 
-# In-memory storage
+# In-memory storage (Note: Not thread-safe. Use database or locks for production)
 teachers_db = {}
 teacher_id_counter = 1
 
@@ -87,7 +87,6 @@ def delete_teacher(teacher_id: int):
     if teacher_id not in teachers_db:
         raise HTTPException(status_code=404, detail="Teacher not found")
     del teachers_db[teacher_id]
-    return None
 
 if __name__ == "__main__":
     import uvicorn
