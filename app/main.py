@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union, Optional, Any
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -29,7 +29,7 @@ class Student(StudentBase):
 
 
 # In-memory storage for students
-students_db: dict[int, dict] = {}
+students_db: dict[int, dict[str, Any]] = {}
 student_id_counter: int = 1
 
 
