@@ -25,7 +25,7 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/status}")
+@app.get("/status")
 def read_root_status():
     return {"Status": "Success"}
 
