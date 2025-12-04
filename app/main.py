@@ -31,14 +31,17 @@ def get_weekly_weather() -> WeeklyWeatherResponse:
     for i in range(7):
         current_date = today + timedelta(days=i)
         day_of_week = day_names[current_date.weekday()]
+        temp_high = 28 + (i % 5)
+        temp_low = min(22 + (i % 3), temp_high - 5)
+        humidity = min(60 + (i * 3), 85)
         forecast.append(
             DailyWeather(
                 date=current_date.isoformat(),
                 day_of_week=day_of_week,
                 condition=conditions[i % len(conditions)],
-                temperature_high=28 + (i % 5),
-                temperature_low=22 + (i % 3),
-                humidity=60 + (i * 3) % 25,
+                temperature_high=temp_high,
+                temperature_low=temp_low,
+                humidity=humidity,
             )
         )
     
@@ -63,7 +66,7 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.get("/api/weather")
 def get_weather() -> WeeklyWeatherResponse:
-    """取得一週天氣預報。"""
+    """Get weekly weather forecast. 取得一週天氣預報。"""
     return get_weekly_weather()
 
 if __name__ == "__main__":
