@@ -1,7 +1,22 @@
 from typing import Union
+from datetime import date
 from fastapi import FastAPI
 
 app = FastAPI()
+
+
+@app.get("/weather")
+def get_weather():
+    """Return today's weather information."""
+    today = date.today().isoformat()
+    return {
+        "date": today,
+        "temperature": 25,
+        "unit": "celsius",
+        "description": "晴天",
+        "humidity": 60,
+        "wind_speed": 10
+    }
 
 @app.get("/")
 def read_root():
