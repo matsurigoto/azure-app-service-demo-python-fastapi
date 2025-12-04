@@ -5,14 +5,14 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# 學生資料模型
+# Student data model
 class Student(BaseModel):
     id: int
     name: str
     age: int
     grade: str
 
-# 範例學生資料
+# Sample student data
 STUDENTS = [
     Student(id=1, name="王小明", age=18, grade="A"),
     Student(id=2, name="李小華", age=19, grade="B"),
@@ -35,7 +35,7 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.get("/students/random", response_model=Student)
 def get_random_student():
-    """取得隨機一位學生資料"""
+    """Get a random student's data"""
     return random.choice(STUDENTS)
 
 if __name__ == "__main__":
