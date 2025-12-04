@@ -1,6 +1,6 @@
 import random
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -39,6 +39,8 @@ async def read_item(item_id: int, q: Union[str, None] = None):
 @app.get("/classroom", response_model=Classroom)
 def get_random_classroom():
     """Get a random classroom information"""
+    if not CLASSROOMS:
+        raise HTTPException(status_code=404, detail="No classrooms available")
     return random.choice(CLASSROOMS)
 
 if __name__ == "__main__":
