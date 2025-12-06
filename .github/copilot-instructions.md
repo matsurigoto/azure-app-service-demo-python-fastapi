@@ -91,7 +91,7 @@ The Dockerfile uses Python 3.9 and runs on port 80 in the container.
 
 ## Testing
 
-**Current State:** No automated tests are configured. The CI pipeline (`.github/workflows/ci.yml`) only validates that dependencies install successfully. The test step echoes "No tests specified" (line 31-32, comment in Chinese: "在這裡添加你的測試命令，例如 pytest").
+**Current State:** No automated tests are configured. The CI pipeline (`.github/workflows/ci.yml`) only validates that dependencies install successfully. The test step echoes "No tests specified" (lines 31-32 contain a placeholder comment indicating where test commands should be added).
 
 **To manually verify the application works:**
 1. Start the development server: `fastapi dev app/main.py`
@@ -125,7 +125,7 @@ The Dockerfile uses Python 3.9 and runs on port 80 in the container.
 
 1. **Typo in app/main.py line 10:** Route decorator has extra closing brace: `@app.get("/status}")` should be `@app.get("/status")`
 2. **No automated tests:** Testing infrastructure needs to be added
-3. **Duplicate function name:** Both `/` and `/status` endpoints use `read_root()` as the function name (Python will use the last definition)
+3. **Duplicate function name:** Both `/` and `/status` endpoints use `read_root()` as the function name, causing the first function to be overwritten and making the `/` endpoint potentially unreachable
 
 ## Dependencies
 
